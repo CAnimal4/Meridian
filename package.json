@@ -1,0 +1,18 @@
+{
+  "name": "meridian",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Meridian - AP Human Geography Learning App",
+  "scripts": {
+    "build": "npm run build:analytics",
+    "build:analytics": "esbuild analytics.js --bundle --minify --outfile=dist/analytics.js --format=esm",
+    "dev": "python3 -m http.server 8000",
+    "lint": "echo 'No linter configured'"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}
