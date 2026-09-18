@@ -5233,9 +5233,9 @@ mean/nice
       const enabledSummerModules = summerModules.filter(m => this.state?.settings?.modulesEnabled?.[m.key]);
       const geometryMode = this.currentLevel === 'geometry';
       const meridianMode = this.$.brandName?.textContent === 'Meridian';
-      this.$.headerLevel.textContent = meridianMode ? 'AP Human Geography' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1'));
+      this.$.headerLevel.textContent = meridianMode ? 'AP Human Geo' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1'));
       const classSwitcherLabel = document.getElementById('classSwitcherLabel');
-      if (classSwitcherLabel) classSwitcherLabel.textContent = meridianMode ? 'AP Human Geography' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1'));
+      if (classSwitcherLabel) classSwitcherLabel.textContent = meridianMode ? 'AP Human Geo' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1'));
       document.querySelectorAll('#classSwitcherMenu [data-class]').forEach((option) => { const current = option.dataset.class === this.currentLevel; option.classList.toggle('is-current', current); option.setAttribute('aria-current', current ? 'page' : 'false'); });
       this.$.spanish1Tab.classList.toggle('is-active', !spanish2);
       this.$.spanish2Tab.classList.toggle('is-active', spanish2);
@@ -7052,7 +7052,7 @@ mean/nice
     const syncClassSwitcher = () => {
       const spanish2 = App.currentLevel === 'spanish2';
       const meridianMode = document.getElementById('brandName')?.textContent === 'Meridian';
-      if (classLabel) classLabel.textContent = meridianMode ? 'AP Human Geography' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1');
+      if (classLabel) classLabel.textContent = meridianMode ? 'AP Human Geo' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1');
       classMenu?.querySelectorAll('[data-class]').forEach((option) => { const current = option.dataset.class === App.currentLevel; option.classList.toggle('is-current', current); option.setAttribute('aria-current', current ? 'page' : 'false'); });
     };
     if (classSwitcher && classButton && classMenu) {
