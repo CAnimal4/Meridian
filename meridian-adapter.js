@@ -61,5 +61,9 @@
     };
     try { app.setLevel?.('spanish1', { historyMode: 'replace' }); } catch (_) {}
     applyMeridianLabels(app);
+    // The legacy level renderer runs once after setLevel; re-apply the
+    // Meridian context after that pass so the header never falls back to
+    // Spanish copy.
+    window.setTimeout(() => applyMeridianLabels(app), 80);
   }, 0));
 })();
