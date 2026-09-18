@@ -4,7 +4,7 @@
 
   const FOUNDATION = {
     brand: 'Meridian',
-    context: 'AP Human Geography',
+    context: 'AP Human Geo',
     title: 'Meridian — AP Human Geography',
     accent: '#8b6a4a'
   };
