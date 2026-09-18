@@ -1,0 +1,11 @@
+{
+  "name": "Meridian — AP Human Geography",
+  "short_name": "Meridian",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#8b6a4a",
+  "icons": [
+    { "src": "assets/meridian-mark.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

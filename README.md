@@ -1,36 +1,39 @@
-# History
+# Meridian
 
-New app workspace for AP Human Geography. This is intentionally pre-foundation: naming and visual direction only for now.
+Meridian is the AP Human Geography learning app in the Atlas collection. This folder contains the foundation only; content modules are intentionally not installed yet.
 
-Selected name: **Meridian**.
+## Foundation included
 
-## Name options
+- responsive learning-app shell adapted from the validated Vertex foundation
+- Meridian brand, tan/parchment theme, app mark, title, and app switcher
+- browser persistence and defensive state migration
+- progress analytics and practice-session history surfaces
+- feedback modal and Tally handoff surface
+- premium/access, moderation, and admin-export API routes copied as foundation plumbing
+- first-run, settings, hidden-question, and export/import UI plumbing
+- Vercel static/API configuration
 
-The first round felt too formal or overly themed. This round aims for the simplicity of Claro and Vertex: short, real words with a clear connection to history, society, or geography.
+## Deliberately excluded
 
-- **Civitas** — a compact real Latin-root word connected to citizenship, society, and the city.
-- **Meridian** — a geographic term with a clean, confident sound; especially good for AP Human Geography.
-- **Context** — direct and useful: history and geography make more sense in context.
-- **Origin** — simple, broad, and naturally connected to historical study.
-- **Agora** — a real historical word for a public gathering place; social and memorable.
-- **Era** — extremely simple and time-centered, though less distinctive.
-- **Locale** — a class term for place, with a friendly and app-like sound.
-- **Spatial** — central to geographic thinking; clean and modern.
-- **Terrain** — concrete, visual, and strongly tied to place.
-- **Diffusion** — a core AP Human Geography process; distinctive and energetic.
-- **Pattern** — simple, memorable, and central to analyzing maps and societies.
-- **Scale** — short, sharp, and unmistakably geographic.
-- **Vector** — already associated with direction and movement; modern but still academic.
-- **Region** — foundational class vocabulary and easy to understand.
+- all Vertex geometry modules, geometry questions, math keyboard, and Canvas PDFs
+- Spanish modules, vocabulary, Spanish 1/2 labels, and Claro-specific curriculum
+- Meridian AP Human Geography modules; those are the next phase
 
-Current recommendation remains **Meridian**. The strongest new alternatives are **Locale**, **Terrain**, **Pattern**, and **Scale**.
+## Local preview
 
-## Visual direction
+Serve this folder with a static server. It is dependency-free and does not require a build step. The server routes under `api/` require the Vercel runtime.
 
-Keep the light brown, parchment, clay, espresso, and muted olive palette: grounded and academic without feeling old-fashioned. For the eventual logo, use the same compact, clean, flat-mark language as Claro and Vertex. A globe is a good direction, but it should be simplified into a crisp app mark rather than illustrated or antiquarian.
+## Validation
 
-The first generated exploration sheet is retained for reference in `assets/logo-options/history-brand-options.png`, but it is not the target style.
+```sh
+node --check app.js
+node --check meridian-adapter.js
+```
 
-The current Meridian mark is `assets/meridian-mark.png`.
+Foundation runtime checks are available through `runAutomatedChecks()` in the browser console after the app loads.
+
+## Deployment
+
+The intended Vercel project is `meridianhistory.vercel.app`. Deployment and server-only environment configuration remain separate from this local foundation work.
 
 No foundation or modules have been started yet.
