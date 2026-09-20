@@ -4050,6 +4050,7 @@ mean/nice
         // first run
         firstRunOverlay: $('firstRunOverlay'),
         firstRunCloseBtn: $('firstRunCloseBtn'),
+        firstRunSkipBtn: $('firstRunSkipBtn'),
         firstRunGotItBtn: $('firstRunGotItBtn')
       };
     },
@@ -4391,6 +4392,7 @@ mean/nice
         this.closeModal(this.$.firstRunOverlay);
       };
       this.$.firstRunGotItBtn.addEventListener('click', closeFirstRun);
+      this.$.firstRunSkipBtn.addEventListener('click', closeFirstRun);
       this.$.firstRunCloseBtn.addEventListener('click', closeFirstRun);
       this.$.firstRunOverlay.addEventListener('click', (e) => {
         if (e.target === this.$.firstRunOverlay) closeFirstRun();
