@@ -113,16 +113,16 @@ Developer note:
         <img class="home-mark" src="assets/meridian-mark.png" alt="" aria-hidden="true" />
       </div>
       <div class="level-switch" role="tablist" aria-label="AP Human Geography level" hidden>
-        <button class="level-tab is-active" id="spanish1Tab" role="tab" aria-selected="true">Spanish 1</button>
-        <button class="level-tab" id="spanish2Tab" role="tab" aria-selected="false">Spanish 2 Honors</button>
+        <button class="level-tab is-active" id="spanish1Tab" role="tab" aria-selected="true">AP Human Geography</button>
+        <button class="level-tab" id="spanish2Tab" role="tab" aria-selected="false">Reference</button>
       </div>
       <div class="home-actions">
-        <button class="btn primary home-start-btn" id="enterPracticeBtn" disabled>Modules coming soon</button>
+        <button class="btn primary home-start-btn" id="enterPracticeBtn">Enter AP Human Geography session →</button>
         <button class="btn home-settings-btn" id="homeSettingsBtn">Open module settings</button>
       </div>
       <section class="library-launch-card" aria-labelledby="libraryLaunchTitle">
         <div class="library-launch-mark" aria-hidden="true">▦</div>
-        <div><span class="home-overview-label">Shared resources</span><h2 id="libraryLaunchTitle">Library</h2><p>Browse future AP Human Geography resources and keep your own uploads private until you request publication.</p></div>
+        <div><span class="home-overview-label">Shared resources</span><h2 id="libraryLaunchTitle">Library</h2><p>Browse AP Human Geography resources and keep your own uploads private until you request publication.</p></div>
         <button class="btn primary" id="openLibraryBtn" type="button">Open Library <span aria-hidden="true">→</span></button>
       </section>
       <section class="dashboard-analytics" id="dashboardAnalytics" aria-labelledby="analyticsTitle">
@@ -141,8 +141,8 @@ Developer note:
       <div class="home-overview level-panel" id="spanish1Panel" role="tabpanel">
         <div class="home-overview-card">
           <span class="home-overview-label">Ready to practice</span>
-          <strong id="homeModuleSummary">No modules are enabled yet.</strong>
-          <small>Meridian’s AP Human Geography modules will appear here as they are released.</small>
+          <strong id="homeModuleSummary">Choose modules in Settings to begin.</strong>
+          <small>Choose modules in Settings, then start a focused AP Human Geography session.</small>
         </div>
         <div class="home-overview-card home-overview-card-muted">
           <span class="home-overview-label">Simple by default</span>
@@ -153,9 +153,9 @@ Developer note:
       <div class="spanish2-panel level-panel" id="spanish2Panel" role="tabpanel" hidden>
         <div class="spanish2-icon" aria-hidden="true">✦</div>
         <div>
-          <span class="home-overview-label">Spanish 2</span>
-          <h2>Spanish 2 Honors is ready.</h2>
-          <p>Past-tense, ordinal, and translation practice.</p>
+          <span class="home-overview-label">Reference</span>
+          <h2>AP Human Geography reference materials.</h2>
+          <p>Use the Library and focused modules to review the current Canvas source set.</p>
           <small class="summer-summary" id="spanish2ModuleSummary">No Summer Prep modules enabled yet</small>
           <div class="summer-resources">
             <a class="resource-link" href="https://quizlet.com/717244172/past-tense-times-flash-cards/?funnelUUID=5a5b427d-69c4-4a3b-a133-b0254b36035f" target="_blank" rel="noopener">Open the past-tense Quizlet ↗</a>
@@ -198,11 +198,11 @@ Developer note:
       </section>
     </main>
 
-    <div class="modal-overlay library-overlay" id="libraryOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="libraryTitle" data-tally-url="https://tally.so/r/REPLACE_WITH_LIBRARY_FORM_ID" data-public-files='[]'>
+    <div class="modal-overlay library-overlay" id="libraryOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="libraryTitle" data-tally-url="https://tally.so/r/REPLACE_WITH_LIBRARY_FORM_ID" data-public-files='[{"name":"Unit 1 Lecture Notes Packet","description":"Teacher-provided AP Human Geography notes for Unit 1 Thinking Geographically.","url":"assets/canvas-ap-human-geo/unit-1-lecture-notes-packet.pdf","type":"pdf"},{"name":"1.1 Introduction to Maps","description":"Lecture slides covering map types, spatial patterns, and map projections.","url":"assets/canvas-ap-human-geo/1-1-lecture-slides.pdf","type":"pdf"},{"name":"1.2 and 1.3 Geographic Data","description":"Lecture slides covering data collection, GIS, and geographic information.","url":"assets/canvas-ap-human-geo/1-2-1-3-lecture-slides.pdf","type":"pdf"},{"name":"1.4 Spatial Concepts","description":"Lecture slides covering location, place, distance decay, flows, and spatial patterns.","url":"assets/canvas-ap-human-geo/1-4-lecture-slides.pdf","type":"pdf"},{"name":"1.5 Human Environment Interaction","description":"Lecture slides covering environmental determinism and possibilism.","url":"assets/canvas-ap-human-geo/1-5-lecture-slides.pdf","type":"pdf"},{"name":"1.7 Regional Analysis","description":"Lecture slides covering formal, functional, and perceptual regions.","url":"assets/canvas-ap-human-geo/1-7-lecture-slides.pdf","type":"pdf"},{"name":"FRQ Workshop","description":"Teacher-provided free-response question workshop slides.","url":"assets/canvas-ap-human-geo/frq-workshop-slides.pdf","type":"pdf"},{"name":"2.1 Population Distribution and Density","description":"Lecture slides covering population distribution, density, and scale.","url":"assets/canvas-ap-human-geo/2-1-lecture-slides.pdf","type":"pdf"},{"name":"2.2 Consequences of Population Distribution","description":"Lecture slides covering social, economic, political, and environmental consequences.","url":"assets/canvas-ap-human-geo/2-2-lecture-slides.pdf","type":"pdf"},{"name":"2.4 Population Dynamics","description":"Lecture slides covering fertility, mortality, migration, and population growth or decline.","url":"assets/canvas-ap-human-geo/2-4-lecture-slides.pdf","type":"pdf"}]'>
       <section class="modal library-modal">
         <div class="modal-head"><div><span class="home-overview-label">Meridian resources</span><h2 id="libraryTitle">Library</h2><p>Public class resources for everyone, plus a private shelf for files you upload.</p></div><button class="icon-btn" id="libraryCloseBtn" type="button" aria-label="Close Library">✕</button></div>
         <p class="library-count" id="libraryCount"></p>
-        <section class="library-section"><div class="library-section-heading"><div><span class="home-overview-label">Everyone can open these</span><h3>Public Library</h3><p>Meridian resources will be added here as they are ready.</p></div></div><div class="library-file-list" id="libraryPublicList"></div></section>
+        <section class="library-section"><div class="library-section-heading"><div><span class="home-overview-label">Everyone can open these</span><h3>Public Library</h3><p>Teacher-provided AP Human Geography resources are ready to open here.</p></div></div><div class="library-file-list" id="libraryPublicList"></div></section>
         <section class="library-section library-your-section"><div class="library-section-heading"><div><span class="home-overview-label">Private to this browser</span><h3>Your Library</h3><p>Uploaded files stay on this device until you choose to request public sharing.</p></div><button class="btn primary" id="libraryUploadBtn" type="button">Upload files</button><input id="libraryFileInput" type="file" multiple hidden /></div><div class="library-file-list" id="libraryYourList"></div></section>
       </section>
     </div>
@@ -396,7 +396,7 @@ Developer note:
       <div class="modal-head">
         <div>
           <div style="font-weight:900; font-size:1.05rem" id="settingsTitle">Settings</div>
-          <div class="muted small" id="settingsIntro">Spanish 1 modules. Everything else can stay on its default.</div>
+          <div class="muted small" id="settingsIntro">AP Human Geography modules. Choose only the topics you want today.</div>
         </div>
         <button class="icon-btn" id="settingsCloseBtn" aria-label="Close settings">✕</button>
       </div>
@@ -523,9 +523,9 @@ Developer note:
       </details>
 
       <details class="settings-accordion summer-prep-settings" id="summerPrepSettings">
-        <summary>Spanish 2 Honors <span class="summary-note">Spanish 2</span></summary>
+          <summary>Reference materials <span class="summary-note">AP Human Geography</span></summary>
         <div class="accordion-inner">
-          <p class="settings-section-intro">Past-tense preparation from your Spanish 2 Honors summer packet.</p>
+          <p class="settings-section-intro">Reference material from the current AP Human Geography source set.</p>
           <div class="toggle">
             <div><div class="label">Ordinal Numbers</div><div class="desc">First, second, third, and beyond — ordinal numbers, gender agreement, and real sentence practice.</div></div>
             <label><input type="checkbox" id="toggle_honors_ordinal_numbers" aria-label="Toggle Ordinal Numbers module" /><span class="switch" aria-hidden="true"></span></label>
@@ -821,15 +821,15 @@ Developer note:
       <div class="modal-head">
         <div>
           <div style="font-weight:900; font-size:1.05rem" id="firstRunTitle">A quick guide to Meridian</div>
-          <div class="muted small">Three simple steps to get oriented while AP Human Geography modules are being built.</div>
+          <div class="muted small">Three simple steps to get oriented with the current AP Human Geography resources.</div>
         </div>
         <button class="icon-btn" id="firstRunCloseBtn" aria-label="Close welcome">✕</button>
       </div>
 
       <div class="welcome-steps">
         <div class="welcome-step"><span>1</span><div><strong>Start with the Library</strong><small>Choose <b>Open Library</b> to browse public AP Human Geography resources. You can also upload files that stay private to this browser.</small></div></div>
-        <div class="welcome-step"><span>2</span><div><strong>Watch for modules to arrive</strong><small>Meridian’s practice modules are coming soon. When a module is available, open <b>Modules</b> to choose what you want to study.</small></div></div>
-        <div class="welcome-step"><span>3</span><div><strong>Practice in short sessions</strong><small>When modules are ready, choose a focus, answer one question at a time, and use <b>Next</b> to continue. Your progress will stay in this browser.</small></div></div>
+        <div class="welcome-step"><span>2</span><div><strong>Choose your AP Human Geography modules</strong><small>Open <b>Modules</b> to choose the Canvas-derived topics you want to study.</small></div></div>
+        <div class="welcome-step"><span>3</span><div><strong>Practice in short sessions</strong><small>Choose a focus, answer one question at a time, and use <b>Next</b> to continue. Your progress will stay in this browser.</small></div></div>
       </div>
 
       <div class="row">
@@ -846,9 +846,9 @@ Developer note:
 <script src="app-shared.js"></script>
 <script src="library.js"></script>
 <!-- moderationPanel moderationHistory moderationRequestOverlay are rendered by access-ui.js -->
-<script src="app.js?v=20260918-access-fix-1"></script>
+<script src="app.js?v=20260921-meridian-stage-1"></script>
   <script src="access-ui.js?v=20260918-access-fix-2"></script>
-  <script src="meridian-adapter.js?v=20260917-meridian"></script>
+  <script src="meridian-adapter.js?v=20260921-meridian-stage-1"></script>
   <script>
     document.getElementById('headerLevel')?.replaceChildren('AP Human Geo');
     document.getElementById('classSwitcherLabel')?.replaceChildren('AP Human Geo');

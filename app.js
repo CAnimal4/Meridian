@@ -124,12 +124,12 @@
     { key: 'summer_irregular_imperfect', name: 'Irregular imperfect', level: 2, category: 'Summer Prep' },
     { key: 'summer_tense_choice', name: 'Preterite or imperfect?', level: 2, category: 'Summer Prep' },
     { key: 'summer_translations', name: 'Summer translation challenge', level: 2, category: 'Summer Prep' },
-    { key: 'honors_ordinal_numbers', name: 'Ordinal Numbers', description: 'First, second, third, and beyond — ordinal numbers, gender agreement, and real sentence practice.', level: 2, category: 'Spanish 2 Honors' },
-    { key: 'honors_test1_review', name: 'Test 1 Review', description: 'Preterite, imperfect, past-tense vocabulary, tense choice, and verb translation.', level: 2, category: 'Spanish 2 Honors' }
+    { key: 'honors_ordinal_numbers', name: 'Ordinal Numbers', description: 'Legacy reference module retained for the shared app shell.', level: 2, category: 'Reference' },
+    { key: 'honors_test1_review', name: 'Test 1 Review', description: 'Legacy reference module retained for the shared app shell.', level: 2, category: 'Reference' }
   ];
 
-  // Meridian foundation intentionally ships without learning modules.
-  // Future AP Human Geography modules will be added here after the foundation is stable.
+  // Meridian curriculum is installed by meridian-adapter.js.
+  // AP Human Geography modules are registered by meridian-adapter.js.
   const MODULES = [];
 
   const MAYO_MADNESS_KEY = 'mayo_madness';
@@ -2873,7 +2873,7 @@ mean/nice
     'pensar','empezar','acostar','despertar','seguir'
   ];
 
-  // Spanish 2 Honors summer-prep content from the supplied summer assignment.
+  // Legacy language summer-prep content remains isolated from Meridian.
   const SUMMER_TIME_WORDS_POOL = [
     ['ayer','yesterday'], ['anoche','last night'], ['la semana pasada','last week'], ['el mes pasado','last month'],
     ['esta mañana','this morning'], ['siempre','always'], ['casi siempre','almost always'], ['normalmente','normally'],
@@ -2926,7 +2926,7 @@ mean/nice
   );
   const SUMMER_IRREGULAR_IMPERFECT_POOL = buildSummerConjugationPool('summer-irregular-imperfect', ['ser', 'ir', 'ver'], 'imperfect');
 
-  // Spanish 2 Honors content stays isolated from Spanish 1 and the existing
+  // Legacy language content stays isolated from Meridian and the existing
   // Summer Prep modules, but uses the same hidden-item and scoring framework.
   const ORDINALS = [
     [1, 'primero', 'primera', 'first'], [2, 'segundo', 'segunda', 'second'],
@@ -3748,8 +3748,8 @@ mean/nice
 
         // Questions are created when the user enters a dashboard. This keeps
         // dashboard state from leaking into the next practice session.
-        // Meridian is intentionally a foundation with no installed learning modules yet.
-        // The legacy content checks exercise Claro/Vertex pools and must not block the shell.
+        // Meridian's AP Human Geography modules are supplied by its adapter.
+        // The shared legacy checks must not block the shell.
         if (MODULES.length) this.runAutomatedChecks({ startup: true });
       } catch (err) {
         console.error('App init failed', err);
@@ -4958,8 +4958,7 @@ mean/nice
       // If a module has 0 available items, auto-disable it and notify.
       const messages = [];
 
-      // Meridian intentionally ships as an empty foundation until its first
-      // AP Human Geography module is installed.
+      // Meridian's AP Human Geography modules are supplied by its adapter.
       if (!MODULES.length) {
         this.updateHomeSummary();
         return;
@@ -5237,9 +5236,9 @@ mean/nice
       const enabledSummerModules = summerModules.filter(m => this.state?.settings?.modulesEnabled?.[m.key]);
       const geometryMode = this.currentLevel === 'geometry';
       const meridianMode = this.$.brandName?.textContent === 'Meridian';
-      this.$.headerLevel.textContent = meridianMode ? 'AP Human Geo' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1'));
+      this.$.headerLevel.textContent = meridianMode ? 'AP Human Geo' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Advanced Language' : 'Language Practice'));
       const classSwitcherLabel = document.getElementById('classSwitcherLabel');
-      if (classSwitcherLabel) classSwitcherLabel.textContent = meridianMode ? 'AP Human Geo' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1'));
+      if (classSwitcherLabel) classSwitcherLabel.textContent = meridianMode ? 'AP Human Geo' : (geometryMode ? 'Accelerated Geometry' : (spanish2 ? 'Advanced Language' : 'Language Practice'));
       document.querySelectorAll('#classSwitcherMenu [data-class]').forEach((option) => { const current = option.dataset.class === this.currentLevel; option.classList.toggle('is-current', current); option.setAttribute('aria-current', current ? 'page' : 'false'); });
       this.$.spanish1Tab.classList.toggle('is-active', !spanish2);
       this.$.spanish2Tab.classList.toggle('is-active', spanish2);
@@ -5250,28 +5249,29 @@ mean/nice
       document.body.classList.toggle('level-spanish1', !spanish2);
       document.body.classList.toggle('level-spanish2', spanish2);
       if (this.$.settingsIntro) {
-        this.$.settingsIntro.textContent = geometryMode
-          ? 'Geometry sections. Choose only the topics you want today.'
-          : (spanish2 ? 'Spanish 2 Honors modules. Choose only the drills you want today.' : 'Spanish 1 modules. Choose only the topics you want today.');
+        this.$.settingsIntro.textContent = meridianMode
+          ? 'AP Human Geography modules. Choose only the topics you want today.'
+          : (geometryMode ? 'Geometry sections. Choose only the topics you want today.'
+            : (spanish2 ? 'Advanced language modules. Choose only the drills you want today.' : 'Language modules. Choose only the topics you want today.'));
       }
-      this.$.enterPracticeBtn.disabled = spanish2 && enabledSummerModules.length === 0;
-      this.$.enterPracticeBtn.textContent = geometryMode
-        ? 'Enter geometry session →'
-        : (spanish2 ? (enabledSummerModules.length ? 'Enter Spanish 2 Honors →' : 'Enable Spanish 2 Honors modules') : 'Enter practice session →');
-      this.$.enterPracticeBtn.setAttribute('aria-label', spanish2
-        ? (enabledSummerModules.length ? 'Enter Spanish 2 Honors' : 'Enable Spanish 2 Honors modules')
-        : 'Enter practice session');
+      this.$.enterPracticeBtn.disabled = meridianMode ? false : (spanish2 && enabledSummerModules.length === 0);
+      this.$.enterPracticeBtn.textContent = meridianMode
+        ? 'Enter AP Human Geography session →'
+        : (geometryMode ? 'Enter geometry session →'
+          : (spanish2 ? (enabledSummerModules.length ? 'Enter advanced language session →' : 'Enable advanced language modules') : 'Enter practice session →'));
+      this.$.enterPracticeBtn.setAttribute('aria-label', meridianMode
+        ? 'Enter AP Human Geography session'
+        : (spanish2 ? (enabledSummerModules.length ? 'Enter advanced language session' : 'Enable advanced language modules') : 'Enter practice session'));
       if (this.$.spanish2ModuleSummary) {
         this.$.spanish2ModuleSummary.textContent = enabledSummerModules.length
           ? enabledSummerModules.map(m => m.name).join(', ')
-          : 'No Spanish 2 Honors modules enabled yet';
+          : (meridianMode ? 'No AP Human Geography modules selected yet.' : 'No advanced language modules enabled yet');
       }
     },
 
     updateDocumentTitle() {
-      document.title = this.currentLevel === 'spanish2'
-        ? 'Claro — Spanish 2 Honors'
-        : 'Claro — Spanish 1';
+      const meridianMode = this.$?.brandName?.textContent === 'Meridian';
+      document.title = meridianMode ? 'Meridian — AP Human Geography' : (this.currentLevel === 'spanish2' ? 'Claro — Advanced Language' : 'Claro — Language Practice');
     },
 
     ensureProfileAndAnalytics() {
@@ -5441,7 +5441,7 @@ mean/nice
         row.className = 'session-history-row';
         const date = new Date(session.endedAt || session.startedAt);
         const dateLabel = Number.isNaN(date.getTime()) ? 'Practice session' : date.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
-        const levelLabel = session.level === 'spanish2' ? 'Spanish 2 · Honors' : 'Spanish 1';
+        const levelLabel = document.getElementById('brandName')?.textContent === 'Meridian' ? 'AP Human Geo' : (session.level === 'spanish2' ? 'Advanced Language' : 'Language Practice');
         const modules = session.modules?.length ? session.modules.join(', ') : 'All enabled modules';
         row.innerHTML = `<div class="session-history-main"><strong>${levelLabel}</strong><small>${dateLabel}</small><small>${modules}</small></div><div class="session-history-result"><strong>${this.formatPercent(session.correct, session.answered)}</strong><small>${session.correct} correct · ${session.incorrect} incorrect · ${session.answered} answered</small></div>`;
         list.appendChild(row);
@@ -6710,8 +6710,8 @@ mean/nice
       const requiredModules = ['days', 'months', 'seasons', 'time', 'colors', 'mayo_madness_1', 'mayo_madness_2', 'rapid_translations_2', 'rapid_regular_verbs', 'rapid_irregular_verbs', 'mayo_madness_3_rapid_translations', 'prices', 'weather', 'clothing', 'foods', 'present_progressive', 'ser_estar', 'gustar', 'dates', 'honors_ordinal_numbers', 'honors_test1_review'];
       const hasModules = requiredModules.every((key) => MODULES.some((m) => m.key === key) && modules[key]);
       results.push({ ok: hasModules, label: 'Expanded modules registered (including Mayo Madness parent submodules)' });
-      results.push({ ok: MODULES.find((m) => m.key === 'honors_ordinal_numbers')?.level === 2 && MODULES.find((m) => m.key === 'honors_test1_review')?.level === 2, label: 'Spanish 2 Honors modules are level 2 only' });
-      results.push({ ok: !PREMIUM_COMPLEX_MODULES.has('honors_ordinal_numbers') && !PREMIUM_COMPLEX_MODULES.has('honors_test1_review'), label: 'Spanish 2 Honors modules are not premium-locked' });
+      results.push({ ok: MODULES.find((m) => m.key === 'honors_ordinal_numbers')?.level === 2 && MODULES.find((m) => m.key === 'honors_test1_review')?.level === 2, label: 'Advanced reference modules remain isolated' });
+      results.push({ ok: !PREMIUM_COMPLEX_MODULES.has('honors_ordinal_numbers') && !PREMIUM_COMPLEX_MODULES.has('honors_test1_review'), label: 'Advanced reference modules are not premium-locked' });
       const ordinalAnswers = buildAcceptableAnswerSet(['tercera']);
       results.push({ ok: ordinalAnswers.has(normalizeLoose('TERCERA')) && buildAcceptableAnswerSet(['tercer']).has(normalizeLoose('tercer')) && !buildAcceptableAnswerSet(['tercera']).has(normalizeLoose('tercero')), label: 'Ordinal gender agreement and contextual tercero/tercer forms are strict' });
       results.push({ ok: honorsRegularConjugate('hablar', 'preterite', '1s') === 'hablé' && honorsRegularConjugate('comer', 'imperfect', '1p') === 'comíamos' && honorsRegularConjugate('vivir', 'imperfect', '2p') === 'vivíais', label: 'Honors regular preterite/imperfect endings cover all six persons' });
@@ -7056,7 +7056,7 @@ mean/nice
     const syncClassSwitcher = () => {
       const spanish2 = App.currentLevel === 'spanish2';
       const meridianMode = document.getElementById('brandName')?.textContent === 'Meridian';
-      if (classLabel) classLabel.textContent = meridianMode ? 'AP Human Geo' : (spanish2 ? 'Spanish 2 Honors' : 'Spanish 1');
+      if (classLabel) classLabel.textContent = meridianMode ? 'AP Human Geo' : (spanish2 ? 'Advanced Language' : 'Language Practice');
       classMenu?.querySelectorAll('[data-class]').forEach((option) => { const current = option.dataset.class === App.currentLevel; option.classList.toggle('is-current', current); option.setAttribute('aria-current', current ? 'page' : 'false'); });
     };
     if (classSwitcher && classButton && classMenu) {

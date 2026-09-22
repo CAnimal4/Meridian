@@ -1,6 +1,6 @@
 # Meridian
 
-Meridian is the AP Human Geography learning app in the Atlas collection. This folder contains the foundation only; content modules are intentionally not installed yet.
+Meridian is the AP Human Geography learning app in the Atlas collection. The current local stage includes the Canvas source library and focused practice modules for the collected AP Human Geography materials.
 
 ## Foundation included
 
@@ -12,12 +12,15 @@ Meridian is the AP Human Geography learning app in the Atlas collection. This fo
 - premium/access, moderation, and admin-export API routes copied as foundation plumbing
 - first-run, settings, hidden-question, and export/import UI plumbing
 - Vercel static/API configuration
+- Canvas AP Human Geography source exports in `assets/canvas-ap-human-geo/`
+- nine source-linked practice modules registered by `meridian-adapter.js`
+- public Library entries for the ten collected PDF review files
 
-## Deliberately excluded
+## Scope boundaries
 
-- all Vertex geometry modules, geometry questions, math keyboard, and Canvas PDFs
-- Spanish modules, vocabulary, Spanish 1/2 labels, and Claro-specific curriculum
-- Meridian AP Human Geography modules; those are the next phase
+- all Vertex geometry modules, geometry questions, math keyboard, and Geometry PDFs
+- Claro-specific language curriculum
+- Canvas activities that are assignments, quizzes, or external services rather than downloadable documents or slide decks
 
 ## Local preview
 
@@ -30,10 +33,8 @@ node --check app.js
 node --check meridian-adapter.js
 ```
 
-Foundation runtime checks are available through `runAutomatedChecks()` in the browser console after the app loads.
+Runtime checks are available through `runAutomatedChecks()` in the browser console after the app loads.
 
 ## Deployment
 
-The intended Vercel project is `meridianhistory.vercel.app`. Deployment and server-only environment configuration remain separate from this local foundation work.
-
-No foundation or modules have been started yet.
+The intended Vercel project is `meridianhistory.vercel.app`. Deployment and server-only environment configuration remain separate from this local work.

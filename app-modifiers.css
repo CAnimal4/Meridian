@@ -1,4 +1,4 @@
-/* Meridian theme. Modules and curriculum are intentionally deferred. */
+/* Meridian theme and AP Human Geography curriculum surface. */
 :root{--brand:#8b6a4a;--brand-strong:#6f5138;--brand-soft:#f4eadc;--primary:#8b6a4a;--primary-2:#6f5138;--focus:#c8a77e;--keyhint-bg:#f4eadc;--keyhint-border:#dfc6a8;--bg:#fbf8f4}
 body{background:radial-gradient(1200px 600px at 20% 0%,#f6eee4 0%,transparent 60%),radial-gradient(1200px 600px at 80% 20%,#f3e9dc 0%,transparent 55%),var(--bg)}
 a{color:var(--brand)}

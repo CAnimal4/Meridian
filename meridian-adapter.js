@@ -1,69 +1,79 @@
-/* Meridian app adapter. Content modules intentionally remain empty until release. */
+/* Meridian AP Human Geography curriculum adapter.
+ * Source set: Meridian/assets/canvas-ap-human-geo.
+ */
 (() => {
   'use strict';
 
-  const FOUNDATION = {
-    brand: 'Meridian',
-    context: 'AP Human Geo',
-    title: 'Meridian — AP Human Geography',
-    accent: '#8b6a4a'
+  const FOUNDATION = { brand: 'Meridian', context: 'AP Human Geo', title: 'Meridian — AP Human Geography', accent: '#8b6a4a' };
+  const MODULES = [
+    { key: 'aphg-1-1', group: 'unit-1', section: '1.1', name: 'Introduction to Maps', sources: ['1-1-lecture-slides.pdf', 'unit-1-lecture-notes-packet.pdf'] },
+    { key: 'aphg-1-2-1-3', group: 'unit-1', section: '1.2-1.3', name: 'Geographic Data', sources: ['1-2-1-3-lecture-slides.pdf', 'unit-1-lecture-notes-packet.pdf'] },
+    { key: 'aphg-1-4', group: 'unit-1', section: '1.4', name: 'Spatial Concepts', sources: ['1-4-lecture-slides.pdf'] },
+    { key: 'aphg-1-5', group: 'unit-1', section: '1.5', name: 'Human-Environment Interaction', sources: ['1-5-lecture-slides.pdf'] },
+    { key: 'aphg-1-7', group: 'unit-1', section: '1.7', name: 'Regional Analysis', sources: ['1-7-lecture-slides.pdf'] },
+    { key: 'aphg-2-1', group: 'unit-2', section: '2.1', name: 'Population Distribution and Density', sources: ['2-1-lecture-slides.pdf'] },
+    { key: 'aphg-2-2', group: 'unit-2', section: '2.2', name: 'Consequences of Population Distribution', sources: ['2-2-lecture-slides.pdf'] },
+    { key: 'aphg-2-4', group: 'unit-2', section: '2.4', name: 'Population Dynamics', sources: ['2-4-lecture-slides.pdf'] },
+    { key: 'aphg-frq', group: 'reference', section: 'FRQ', name: 'Free Response Workshop', sources: ['frq-workshop-slides.pdf'] }
+  ];
+  const byKey = Object.fromEntries(MODULES.map((module) => [module.key, module]));
+  const normalize = (value) => String(value ?? '').normalize('NFKC').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9.%/\-\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  const answers = (values) => new Set(values.map(normalize).filter(Boolean));
+  const q = (id, prompt, expected, aliases = [], explanation = 'Review the linked Canvas source for this section.') => ({ id, mode: 'text', prompt, expectedDisplay: expected, acceptable: answers([expected, ...aliases]), explanation });
+  const mcq = (id, prompt, expected, options, explanation) => ({ id, mode: 'mcq', prompt, expectedDisplay: expected, options, correctIndex: options.indexOf(expected), acceptable: answers([expected]), explanation: explanation || 'Use the definition from the linked Canvas source.' });
+
+  const QUESTIONS = {
+    'aphg-1-1': [mcq('map-reference', 'Which map type shows general locations and features?', 'reference map', ['reference map', 'thematic map', 'cartogram', 'isoline']), mcq('map-thematic', 'Which map type communicates a specific spatial pattern or variable?', 'thematic map', ['reference map', 'thematic map', 'road map', 'navigation map']), q('map-clustering', 'A spatial pattern in which features are grouped closely together is called what?', 'clustering', ['clustered distribution']), q('map-dispersal', 'What term describes features spread out across space?', 'dispersal', ['distribution']), q('map-projection', 'Map projections inevitably distort which four spatial relationships?', 'shape, area, distance, and direction', ['shape area distance direction']), q('map-selective', 'Why are maps selective?', 'They cannot show every detail of a place', ['maps cannot show every detail'])],
+    'aphg-1-2-1-3': [q('data-fieldwork', 'What is fieldwork or field observation?', 'Physically visiting a location and recording firsthand information', ['visiting a location and recording firsthand information']), q('data-gis', 'What does GIS stand for?', 'geographic information system', ['geographic information systems']), q('data-remote', 'What technology gathers information about places from a distance?', 'remote sensing'), q('data-census', 'What kind of source counts and describes a population?', 'census data', ['census']), q('data-interview', 'Name one written or recorded source of spatial information identified in the slides.', 'personal interviews', ['field observations', 'media reports', 'travel narratives', 'policy documents', 'landscape analysis', 'photographic interpretation']), q('data-decisions', 'Geospatial data can be used to help make decisions about what?', 'places and spatial relationships', ['location and spatial relationships'])],
+    'aphg-1-4': [q('space-place', 'What concept refers to the physical and human characteristics of a location?', 'place'), q('absolute-location', 'What type of location uses a precise position such as latitude and longitude?', 'absolute location'), q('relative-location', 'What type of location describes a place in relation to other places?', 'relative location'), q('distance-decay', 'What concept describes interaction decreasing as distance increases?', 'distance decay'), q('time-space', 'What process makes places seem closer because communication and transportation become faster?', 'time-space compression'), q('flows', 'What term describes the movement of people, goods, information, or ideas?', 'flows')],
+    'aphg-1-5': [q('hei-determinism', 'Which theory claims the physical environment directly determines human behavior?', 'environmental determinism'), q('hei-possibilism', 'Which theory argues that people can adapt to and modify the environment within limits?', 'possibilism'), q('hei-interaction', 'Human-environment interaction describes the relationship between what?', 'human societies and the natural environment'), q('hei-evolution', 'The slides describe theories of human-environment interaction as having changed over what?', 'time'), q('hei-adaptation', 'Give one way human societies interact with the environment.', 'adapt to environmental conditions', ['modify the environment', 'adapt to the environment']), q('hei-caution', 'Why should environmental explanations avoid assuming that nature alone determines outcomes?', 'People make choices and adapt in different ways', ['humans make choices and adapt'])],
+    'aphg-1-7': [q('region-formal', 'What type of region is defined by one or more measurable, shared characteristics?', 'formal region'), q('region-functional', 'What type of region is organized around a node or focal point?', 'functional region'), q('region-perceptual', 'What type of region is based on people’s feelings or perceptions?', 'perceptual region', ['vernacular region']), q('region-boundary', 'Regional boundaries are often transitional, contested, and what else?', 'overlapping'), q('region-scale', 'At what scales can geographers apply regional analysis?', 'local, national, and global', ['local national global']), q('region-unifying', 'Regions are defined on the basis of what?', 'unifying characteristics or patterns of activity', ['shared characteristics or patterns of activity'])],
+    'aphg-2-1': [q('pop-distribution', 'What does population distribution describe?', 'Where people are located across space'), q('pop-factors', 'Name one physical factor that influences population distribution.', 'climate', ['landforms', 'water bodies']), q('pop-arithmetic', 'What density measure divides total population by total land area?', 'arithmetic density'), q('pop-physiological', 'What density measure divides population by arable land?', 'physiological density'), q('pop-agricultural', 'What density measure divides the number of farmers by arable land?', 'agricultural density'), q('pop-scale', 'Why does scale matter when analyzing population distribution?', 'The factors and patterns can change at different scales', ['patterns vary by scale'])],
+    'aphg-2-2': [q('pop-services', 'Population distribution and density affect the provision of what?', 'services such as medical care', ['public services', 'medical care']), q('pop-environment', 'Population density can affect the environment and what else?', 'natural resources'), q('pop-carrying', 'What term describes the number of people an environment can support?', 'carrying capacity'), q('pop-political', 'Name one process affected by population distribution and density.', 'political processes', ['economic processes', 'social processes']), q('pop-density-tradeoff', 'Why can high density create both benefits and challenges?', 'It can support services while increasing pressure on resources', ['services are easier to provide but resources face more pressure']), q('pop-context', 'Why should consequences of density be analyzed in context?', 'Places have different resources, infrastructure, and environments')],
+    'aphg-2-4': [q('dyn-fertility', 'Name one demographic factor that determines population growth or decline.', 'fertility', ['mortality', 'migration']), q('dyn-rni', 'What rate measures population change from births and deaths, excluding migration?', 'rate of natural increase', ['rni']), q('dyn-doubling', 'What does population doubling time measure?', 'How long it takes a population to double'), q('dyn-migration', 'What demographic process moves people between places?', 'migration'), q('dyn-growth', 'High fertility generally contributes to population what?', 'growth'), q('dyn-decline', 'High mortality or sustained out-migration can contribute to population what?', 'decline')],
+    'aphg-frq': [q('frq-meaning', 'What does FRQ stand for?', 'free response question'), q('frq-time', 'How much total time does the workshop recommend for three FRQs?', '75 minutes'), q('frq-questions', 'How many FRQ questions are on the exam according to the workshop?', '3', ['three']), q('frq-evidence', 'What kind of evidence may an FRQ ask you to analyze?', 'multiple sources of data', ['data sources']), q('frq-demand', 'As an FRQ progresses, what generally happens to the question demands?', 'They become more demanding', ['the demands increase']), q('frq-start', 'What is a useful first step when beginning an FRQ?', 'Read and understand what the question asks', ['identify the task'])]
   };
 
-  function applyMeridianLabels(app) {
+  const PREF_COOKIE = 'meridian_aphg_preferences_v1';
+  const readPrefs = () => { try { const item = document.cookie.split('; ').find((part) => part.startsWith(`${PREF_COOKIE}=`)); return item ? JSON.parse(decodeURIComponent(item.slice(PREF_COOKIE.length + 1))) : {}; } catch (_) { return {}; } };
+  const writePrefs = (value) => { try { document.cookie = `${PREF_COOKIE}=${encodeURIComponent(JSON.stringify(value))}; max-age=31536000; path=/; SameSite=Lax`; } catch (_) {} };
+
+  function applyLabels() {
     document.title = FOUNDATION.title;
     document.documentElement.style.setProperty('--accent', FOUNDATION.accent);
     document.querySelectorAll('#brandName, .app-switcher-menu a.is-current span').forEach((node) => { node.textContent = FOUNDATION.brand; });
-    ['subtitle', 'headerLevel', 'classSwitcherLabel'].forEach((id) => {
-      const node = document.getElementById(id);
-      if (node) node.textContent = FOUNDATION.context;
-    });
-    const home = document.querySelector('#homeCard h1');
-    if (home) home.textContent = 'Understand the world through place.';
-    const intro = document.querySelector('#homeCard .home-intro');
-    if (intro) intro.textContent = 'Meridian is the focused AP Human Geography study space. Choose a section, then build a clearer picture of the world.';
-    document.querySelector('.dashboard-switcher')?.setAttribute('hidden', '');
-    document.querySelector('.level-switch')?.setAttribute('hidden', '');
-    document.querySelector('#spanish2Panel')?.setAttribute('hidden', '');
-    document.querySelector('#practiceBehaviorSettings')?.setAttribute('hidden', '');
-    document.querySelector('#accentToolbar')?.setAttribute('hidden', '');
-    document.querySelector('#activeModuleChip')?.setAttribute('hidden', '');
-    const enter = document.getElementById('enterPracticeBtn');
-    if (enter) {
-      enter.textContent = 'Modules coming soon';
-      enter.disabled = true;
-      enter.setAttribute('aria-label', 'Meridian modules coming soon');
-    }
-    const summary = document.getElementById('homeModuleSummary');
-    if (summary) summary.textContent = 'No modules are enabled yet.';
-    const settings = document.getElementById('moduleSettingsSection');
-    if (settings) settings.innerHTML = '<div class="module-settings-heading"><strong>Meridian modules</strong><small>AP Human Geography modules will appear here as they are released. Your progress, settings, feedback, and session history stay in this browser.</small></div>';
-    return app;
+    ['subtitle', 'headerLevel', 'classSwitcherLabel'].forEach((id) => { const node = document.getElementById(id); if (node) node.textContent = FOUNDATION.context; });
+    const home = document.querySelector('#homeCard h1'); if (home) home.textContent = 'Understand the world through place.';
+    const intro = document.querySelector('#homeCard .home-intro'); if (intro) intro.textContent = 'Meridian is the focused AP Human Geography study space. Choose a section, then build a clearer picture of the world.';
+    ['.dashboard-switcher', '.level-switch', '#spanish2Panel', '#practiceBehaviorSettings', '#accentToolbar', '#activeModuleChip'].forEach((selector) => document.querySelectorAll(selector).forEach((node) => { node.hidden = true; }));
+    const settings = document.getElementById('moduleSettingsSection'); if (settings && !settings.querySelector('[data-meridian-settings]')) settings.innerHTML = '<summary>AP Human Geography modules</summary><div class="accordion-inner" data-meridian-settings></div>';
+    const enter = document.getElementById('enterPracticeBtn'); if (enter) { enter.textContent = 'Enter AP Human Geography session →'; enter.disabled = false; enter.setAttribute('aria-label', 'Enter AP Human Geography session'); }
+  }
+
+  function renderSettings(app) {
+    const section = document.querySelector('#moduleSettingsSection [data-meridian-settings]'); if (!section) return;
+    const prefs = readPrefs(); const saved = prefs.modules || {};
+    const groups = [['unit-1', 'Unit 1 Thinking Geographically'], ['unit-2', 'Unit 2 Population'], ['reference', 'Reference and FRQ']];
+    section.innerHTML = groups.map(([group, label]) => `<details class="module-group"${prefs.groups?.[group] !== false ? ' open' : ''}><summary>${label}</summary><div class="module-group-content">${MODULES.filter((m) => m.group === group).map((m) => `<div class="toggle"><div><div class="label">${m.section} ${m.name}</div><div class="desc">${m.sources.length} Canvas source${m.sources.length === 1 ? '' : 's'} · ${(QUESTIONS[m.key] || []).length} questions</div></div><label><input type="checkbox" data-meridian-module="${m.key}" aria-label="Toggle ${m.name}"${saved[m.key] === true ? ' checked' : ''}><span class="switch" aria-hidden="true"></span></label></div>`).join('')}</div></details>`).join('');
+    section.querySelectorAll('[data-meridian-module]').forEach((box) => box.addEventListener('change', () => { const modules = Object.fromEntries([...section.querySelectorAll('[data-meridian-module]')].map((item) => [item.dataset.meridianModule, item.checked])); writePrefs({ ...readPrefs(), modules }); app.updateHomeSummary(); app.saveSoon?.(); }));
+    section.querySelectorAll('details.module-group').forEach((group) => group.addEventListener('toggle', () => { const title = group.querySelector('summary')?.textContent || ''; const key = title.startsWith('Unit 1') ? 'unit-1' : title.startsWith('Unit 2') ? 'unit-2' : 'reference'; writePrefs({ ...readPrefs(), groups: { ...readPrefs().groups, [key]: group.open } }); }));
   }
 
   document.addEventListener('DOMContentLoaded', () => setTimeout(() => {
-    const app = window.SpanishPracticeApp;
-    if (!app) return;
+    const app = window.SpanishPracticeApp; if (!app) return;
     window.MeridianApp = app;
     app.updateDocumentTitle = () => { document.title = FOUNDATION.title; };
-    app.getEnabledModules = () => [];
-    app.isModulePracticeEnabled = () => false;
-    app.updateHomeSummary = () => { const node = document.getElementById('homeModuleSummary'); if (node) node.textContent = 'No modules are enabled yet.'; };
-    app.runAutomatedChecks = () => {
-      const results = [
-        { ok: document.getElementById('brandName')?.textContent === FOUNDATION.brand, label: 'Meridian branding is installed' },
-        { ok: app.getEnabledModules().length === 0, label: 'Meridian currently has no content modules' },
-        { ok: !!document.getElementById('moduleSettingsSection'), label: 'Module settings surface exists' },
-        { ok: !!document.getElementById('feedbackOverlay'), label: 'Feedback is available' }
-      ];
-      const output = document.getElementById('checksOutput');
-      if (output) output.innerHTML = `${results.map((item) => `${item.ok ? '✓' : '✗'} ${item.label}`).join('<br>')}<br><small>Summary: ${results.filter((item) => item.ok).length}/${results.length} passed</small>`;
-      return { pass: results.filter((item) => item.ok).length, total: results.length, results };
-    };
+    app.getEnabledModules = () => { const prefs = readPrefs(); return MODULES.filter((m) => prefs.modules?.[m.key] === true && (QUESTIONS[m.key] || []).length).map((m) => m.key); };
+    app.isModulePracticeEnabled = (key) => app.getEnabledModules().includes(key);
+    app.getModuleCounts = (key) => { const total = (QUESTIONS[key] || []).length; const hidden = app.state?.hiddenItems || {}; return { total, available: (QUESTIONS[key] || []).filter((item) => !hidden[item.id]).length }; };
+    app.generateQuestion = (key) => { const pool = (QUESTIONS[key] || []).filter((item) => !app.state?.hiddenItems?.[item.id]); if (!pool.length) return null; return { ...pool[Math.floor(Math.random() * pool.length)], module: key }; };
+    app.updateHomeSummary = () => { const node = document.getElementById('homeModuleSummary'); if (node) { const enabled = app.getEnabledModules(); node.textContent = enabled.length ? enabled.map((key) => byKey[key].name).join(', ') : 'No AP Human Geography modules selected yet.'; } };
+    const normalizeMeridianHistoryLabels = () => document.querySelectorAll('.session-history-main strong').forEach((node) => { node.textContent = 'AP Human Geo'; });
+    const originalRender = app.renderQuestion.bind(app); app.renderQuestion = (question, options) => { originalRender(question, options); const title = document.getElementById('qaTitle'); if (title && question) title.textContent = byKey[question.module]?.name || 'AP Human Geography'; };
+    app.refreshSettingsUI = () => { applyLabels(); renderSettings(app); app.updateHomeSummary(); app.renderSessionHistory?.(); normalizeMeridianHistoryLabels(); };
+    app.runAutomatedChecks = () => { const results = [{ ok: document.getElementById('brandName')?.textContent === FOUNDATION.brand, label: 'Meridian branding is installed' }, { ok: MODULES.length === 9, label: 'Nine Canvas-derived modules are registered' }, { ok: MODULES.every((m) => m.sources.length > 0), label: 'Every module retains source references' }, { ok: Object.values(QUESTIONS).every((pool) => pool.length >= 6), label: 'Every module has a varied question bank' }, { ok: !!document.getElementById('libraryOverlay'), label: 'Meridian Library is available' }]; const output = document.getElementById('checksOutput'); if (output) output.innerHTML = `${results.map((item) => `${item.ok ? '✓' : '✗'} ${item.label}`).join('<br>')}<br><small>Summary: ${results.filter((item) => item.ok).length}/${results.length} passed</small>`; return { pass: results.filter((item) => item.ok).length, total: results.length, results }; };
     try { app.setLevel?.('spanish1', { historyMode: 'replace' }); } catch (_) {}
-    applyMeridianLabels(app);
-    // The legacy level renderer runs once after setLevel; re-apply the
-    // Meridian context after that pass so the header never falls back to
-    // Spanish copy.
-    window.setTimeout(() => applyMeridianLabels(app), 80);
+    applyLabels(); app.refreshSettingsUI();
+    window.setTimeout(() => { applyLabels(); renderSettings(app); app.updateHomeSummary(); app.renderSessionHistory?.(); normalizeMeridianHistoryLabels(); }, 80);
   }, 0));
 })();
