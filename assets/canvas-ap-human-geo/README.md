@@ -1,6 +1,6 @@
 # Meridian Canvas AP Human Geography sources
 
-These files came from the AP Human Geography Canvas modules in course 10119, read through the open Canvas session on 2026-09-21.
+These files came from the AP Human Geography Canvas modules in course 10119, read through the open Canvas session on 2026-09-23.
 
 The PDF exports are the review copies used for curriculum inspection. The DOCX and PPTX exports preserve editable source formats for later maintenance. The original Canvas links are recorded below so a future refresh can be compared against the current downloads.
 
@@ -18,5 +18,9 @@ The PDF exports are the review copies used for curriculum inspection. The DOCX a
 | 2.1 Lecture Slides | `2-1-lecture-slides.pdf` | `2-1-lecture-slides.pptx` | [Slides](https://docs.google.com/presentation/d/1hGWtNvNv-_TuiWfiXLaHGO7dwReZ_ed-LhMJvf4o1YU/edit) |
 | 2.2 Lecture Slides | `2-2-lecture-slides.pdf` | `2-2-lecture-slides.pptx` | [Slides](https://docs.google.com/presentation/d/15CKxpggXi2UMrfx0voJsgw8EoRuydKNcfYlpUhM_5iQ/edit) |
 | 2.4 Lecture Slides | `2-4-lecture-slides.pdf` | `2-4-lecture-slides.pptx` | [Slides](https://docs.google.com/presentation/d/1xZtZtEdpw8Qk41bQH5AoYGQQpl-a1lKGyDvN_9LnA3c/edit) |
+| 2.5 Anderson 2.5 The Demographic Transition Model | `2-5-demographic-transition-model.pdf` | — | [Slides](https://docs.google.com/presentation/d/1tOp33thjP7hUO1ibZafFL7pD-yNnCjSj26DFr8NNk7Q/edit) |
+| 2.6 Malthusian Theory | `2-6-malthusian-theory.pdf` | — | [Slides](https://docs.google.com/presentation/d/1B0GznSYVH_ww7YIh-7PACZdPnx0rqO-o5SbQSFGdzHM/edit) |
 
 The source PDFs are teacher-provided materials. Meridian question prompts below are concise practice checks derived from the stated objectives and visible lesson content; they do not replace the source files.
+
+The Canvas AP Human Geography course was checked on 2026-09-23. Unit 2 included 2.5 and 2.6 slides, assignments, and the 2.4–2.6 quiz. The two slide decks above were exported from the exact Google Slides linked from the Canvas lesson pages. Earlier units remain represented by the downloaded source files listed above.

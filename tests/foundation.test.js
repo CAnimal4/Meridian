@@ -28,7 +28,7 @@ test('Meridian Library exposes every collected Canvas document and slideshow PDF
   const match = html.match(/data-public-files='([^']+)'/);
   assert.ok(match, 'public Library resource metadata is present');
   const resources = JSON.parse(match[1]);
-  assert.equal(resources.length, 10);
+  assert.equal(resources.length, 12);
   for (const resource of resources) {
     assert.equal(resource.type, 'pdf');
     assert.equal(fs.existsSync(path.join(root, resource.url)), true, resource.url);
