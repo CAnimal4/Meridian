@@ -39,6 +39,25 @@
     'aphg-frq': [q('frq-meaning', 'What does FRQ stand for?', 'free response question'), q('frq-time', 'How much total time does the workshop recommend for three FRQs?', '75 minutes'), q('frq-questions', 'How many FRQ questions are on the exam according to the workshop?', '3', ['three']), q('frq-evidence', 'What kind of evidence may an FRQ ask you to analyze?', 'multiple sources of data', ['data sources']), q('frq-demand', 'As an FRQ progresses, what generally happens to the question demands?', 'They become more demanding', ['the demands increase']), q('frq-start', 'What is a useful first step when beginning an FRQ?', 'Read and understand what the question asks', ['identify the task'])]
   };
 
+  // Convert short factual recall prompts into recognition practice so students
+  // are tested on the concept rather than exact wording. Keep explanation and
+  // FRQ prompts typed, where constructing a response is part of the skill.
+  for (const module of MODULES.filter((item) => item.key !== 'aphg-frq')) {
+    const pool = QUESTIONS[module.key] || [];
+    const distractors = [...new Set(pool.map((item) => item.expectedDisplay).filter(Boolean))];
+    for (const item of pool) {
+      if (item.mode !== 'text' || /\b(why|explain|give one way|how can|what relationship)\b/i.test(item.prompt)) continue;
+      const choices = [item.expectedDisplay, ...distractors.filter((value) => normalize(value) !== normalize(item.expectedDisplay))].slice(0, 4);
+      if (choices.length < 3) continue;
+      const rotation = [...item.id].reduce((sum, char) => sum + char.charCodeAt(0), 0) % choices.length;
+      choices.push(...choices.splice(0, rotation));
+      item.mode = 'mcq';
+      item.options = choices;
+      item.correctIndex = choices.indexOf(item.expectedDisplay);
+      item.acceptable = answers([item.expectedDisplay]);
+    }
+  }
+
   const PREF_COOKIE = 'meridian_aphg_preferences_v1';
   const readPrefs = () => { try { const item = document.cookie.split('; ').find((part) => part.startsWith(`${PREF_COOKIE}=`)); return item ? JSON.parse(decodeURIComponent(item.slice(PREF_COOKIE.length + 1))) : {}; } catch (_) { return {}; } };
   const writePrefs = (value) => { try { document.cookie = `${PREF_COOKIE}=${encodeURIComponent(JSON.stringify(value))}; max-age=31536000; path=/; SameSite=Lax`; } catch (_) {} };
@@ -76,7 +95,7 @@
     const normalizeMeridianHistoryLabels = () => document.querySelectorAll('.session-history-main strong').forEach((node) => { node.textContent = 'AP Human Geo'; });
     const originalRender = app.renderQuestion.bind(app); app.renderQuestion = (question, options) => { originalRender(question, options); const title = document.getElementById('qaTitle'); if (title && question) title.textContent = byKey[question.module]?.name || 'AP Human Geography'; const input = document.getElementById('answerInput'); if (input) { const spanish = /Translate (to|into) Spanish|Write .* in Spanish|Spanish .* phrase/i.test(question?.prompt || ''); const phrase = /phrase|sentence|translate/i.test(question?.prompt || ''); const instruction = spanish ? (phrase ? 'Write your answer in Spanish...' : 'Type the Spanish term...') : 'Type your answer...'; input.placeholder = instruction; input.setAttribute('aria-label', instruction.replace(/\.\.\.$/,'')); } };
     app.refreshSettingsUI = () => { applyLabels(); renderSettings(app); app.updateHomeSummary(); app.renderSessionHistory?.(); normalizeMeridianHistoryLabels(); };
-    app.runAutomatedChecks = () => { const results = [{ ok: document.getElementById('brandName')?.textContent === FOUNDATION.brand, label: 'Meridian branding is installed' }, { ok: MODULES.length === 11, label: 'Eleven Canvas-derived modules are registered' }, { ok: MODULES.every((m) => m.sources.length > 0), label: 'Every module retains source references' }, { ok: Object.values(QUESTIONS).every((pool) => pool.length >= 6), label: 'Every module has a varied question bank' }, { ok: MODULES.filter((module) => module.key !== 'aphg-frq').every((module) => QUESTIONS[module.key].some((question) => question.mode === 'mcq')), label: 'Knowledge-check modules include multiple-choice practice while FRQ stays open response' }, { ok: !!document.getElementById('libraryOverlay'), label: 'Meridian Library is available' }]; const output = document.getElementById('checksOutput'); if (output) output.innerHTML = `${results.map((item) => `${item.ok ? '✓' : '✗'} ${item.label}`).join('<br>')}<br><small>Summary: ${results.filter((item) => item.ok).length}/${results.length} passed</small>`; return { pass: results.filter((item) => item.ok).length, total: results.length, results }; };
+    app.runAutomatedChecks = () => { const results = [{ ok: document.getElementById('brandName')?.textContent === FOUNDATION.brand, label: 'Meridian branding is installed' }, { ok: MODULES.length === 11, label: 'Eleven Canvas-derived modules are registered' }, { ok: MODULES.every((m) => m.sources.length > 0), label: 'Every module retains source references' }, { ok: Object.values(QUESTIONS).every((pool) => pool.length >= 6), label: 'Every module has a varied question bank' }, { ok: MODULES.filter((module) => module.key !== 'aphg-frq').every((module) => QUESTIONS[module.key].some((question) => question.mode === 'mcq')), label: 'Knowledge-check modules include multiple-choice practice while FRQ stays open response' }, { ok: Object.entries(QUESTIONS).filter(([key]) => key !== 'aphg-frq').every(([, pool]) => pool.every((question) => question.mode === 'mcq' || /\b(why|explain|give one way|how can|what relationship)\b/i.test(question.prompt))), label: 'Short factual answers use choices; explanatory prompts stay written' }, { ok: Object.values(QUESTIONS).flat().filter((question) => question.mode === 'mcq').every((question) => question.options?.length >= 3 && question.options[question.correctIndex] === question.expectedDisplay), label: 'Multiple-choice options and answer keys are valid' }, { ok: !!document.getElementById('libraryOverlay'), label: 'Meridian Library is available' }]; const output = document.getElementById('checksOutput'); if (output) output.innerHTML = `${results.map((item) => `${item.ok ? '✓' : '✗'} ${item.label}`).join('<br>')}<br><small>Summary: ${results.filter((item) => item.ok).length}/${results.length} passed</small>`; return { pass: results.filter((item) => item.ok).length, total: results.length, results }; };
     try { app.setLevel?.('spanish1', { historyMode: 'replace' }); } catch (_) {}
     applyLabels(); app.refreshSettingsUI();
     window.setTimeout(() => { applyLabels(); renderSettings(app); app.updateHomeSummary(); app.renderSessionHistory?.(); normalizeMeridianHistoryLabels(); }, 80);
