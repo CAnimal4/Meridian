@@ -329,6 +329,21 @@
       background:#fff;
     }
     input[type="text"]:focus-visible{outline:3px solid var(--focus); outline-offset:2px}
+    .meridian-frq-response{width:100%;min-height:220px;resize:vertical;border:1px solid var(--border);border-radius:14px;padding:14px;color:var(--text);background:#fff;font:inherit;line-height:1.55;outline:none}
+    .meridian-frq-response:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+    .meridian-frq-stimulus{margin:12px 0;padding:10px;border:1px solid var(--border);border-radius:12px;background:#fff}
+    .meridian-frq-stimulus img{display:block;width:100%;height:auto;border-radius:8px}
+    .meridian-frq-stimulus figcaption{margin-top:7px;color:var(--muted);font-size:.85rem}
+    .meridian-frq-review{border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--surface-2)}
+    .meridian-frq-review h3{margin:0 0 6px;font-size:1.05rem}
+    .meridian-frq-review p{margin:6px 0;line-height:1.5}
+    .meridian-frq-review ul{display:grid;gap:7px;margin:12px 0;padding:0;list-style:none}
+    .meridian-frq-review li{padding:9px 11px;border-radius:9px;background:#fff;line-height:1.4}
+    .meridian-frq-review li.met{border-left:4px solid #16a34a}
+    .meridian-frq-review li.missing{border-left:4px solid #d97706}
+    .meridian-frq-review details{margin-top:12px;padding:10px 12px;border-radius:10px;background:#fff}
+    .meridian-frq-review summary{cursor:pointer;font-weight:750}
+    .meridian-frq-review details p{margin:10px 0 0;white-space:pre-wrap}
 
     .actions{
       display:flex;
