@@ -132,6 +132,29 @@
   // AP Human Geography modules are registered by meridian-adapter.js.
   const MODULES = [];
 
+  function installModuleSharing(app) {
+    const section = document.getElementById('moduleSettingsSection');
+    if (!section || section.querySelector('#shareModulesBtn')) return;
+    const bar = document.createElement('div'); bar.className = 'module-share-tools';
+    bar.innerHTML = '<button type="button" class="btn small" id="shareModulesBtn">🔗 Share selected modules</button><span id="moduleShareStatus" role="status" aria-live="polite"></span>';
+    section.append(bar);
+    const keys = new Set(MODULES.map((m) => m.key));
+    const params = new URLSearchParams(location.search), encoded = params.get('modules');
+    if (encoded !== null) {
+      const chosen = new Set(encoded.split(',').filter((key) => keys.has(key)));
+      for (const module of MODULES) app.state.settings.modulesEnabled[module.key] = chosen.has(module.key);
+      app.saveSoon(); app.refreshSettingsUI();
+    }
+    document.getElementById('shareModulesBtn').addEventListener('click', async () => {
+      const selected = MODULES.filter((m) => app.state.settings.modulesEnabled[m.key]).map((m) => m.key);
+      const query = new URLSearchParams(location.search); query.set('modules', selected.join(','));
+      const url = `${location.origin}${location.pathname}?${query}${location.hash}`;
+      try { await navigator.clipboard.writeText(url); document.getElementById('moduleShareStatus').textContent = 'Link copied.'; }
+      catch (_) { window.prompt('Copy this module link:', url); }
+    });
+    section.addEventListener('change', (event) => { if (event.target.matches('input[type="checkbox"]')) { const query = new URLSearchParams(location.search); query.delete('modules'); const value = query.toString(); history.replaceState(null, '', `${location.pathname}${value ? `?${value}` : ''}${location.hash}`); } });
+  }
+
   const MAYO_MADNESS_KEY = 'mayo_madness';
   const MAYO_MADNESS_PASSWORDS = new Set();
   const PREMIUM_ACCESS_STORAGE_KEY = 'claro_premium_access_v1';
@@ -3731,6 +3754,7 @@ mean/nice
 
       this.buildPools();
       this.refreshSettingsUI();
+      installModuleSharing(this);
       this.renderKeyHintStrip();
 
       // Auto-disable empty modules (edge case handling)
