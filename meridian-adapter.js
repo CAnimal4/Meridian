@@ -183,6 +183,15 @@
     const prefs = readPrefs(); const saved = prefs.modules || {};
     const groups = [['unit-1', 'Unit 1 Thinking Geographically'], ['unit-2', 'Unit 2 Population'], ['reference', 'Reference and FRQ']];
     section.innerHTML = groups.map(([group, label]) => `<details class="module-group"${prefs.groups?.[group] !== false ? ' open' : ''}><summary>${label}</summary><div class="module-group-content">${MODULES.filter((m) => m.group === group).map((m) => `<div class="toggle"><div><div class="label">${m.section} ${m.name}</div><div class="desc">${m.sources.length} Canvas source${m.sources.length === 1 ? '' : 's'} · ${(QUESTIONS[m.key] || []).length} questions</div></div><label><input type="checkbox" data-meridian-module="${m.key}" aria-label="Toggle ${m.name}"${saved[m.key] === true ? ' checked' : ''}><span class="switch" aria-hidden="true"></span></label></div>`).join('')}</div></details>`).join('');
+    const shareTools = document.createElement('div'); shareTools.className = 'module-share-tools';
+    shareTools.innerHTML = '<button type="button" class="btn small" id="shareModulesBtn">🔗 Share selected modules</button><span id="moduleShareStatus" role="status" aria-live="polite"></span>';
+    shareTools.querySelector('#shareModulesBtn').addEventListener('click', async () => {
+      const query = new URLSearchParams(location.search); query.set('modules', app.getEnabledModules().join(','));
+      const url = `${location.origin}${location.pathname}?${query.toString()}${location.hash}`; history.replaceState(null, '', url);
+      try { await navigator.clipboard.writeText(url); shareTools.querySelector('#moduleShareStatus').textContent = 'Link copied. Selected modules update the URL.'; }
+      catch (_) { window.prompt('Copy this module link:', url); }
+    });
+    section.append(shareTools);
     section.querySelectorAll('[data-meridian-module]').forEach((box) => box.addEventListener('change', () => { const modules = Object.fromEntries([...section.querySelectorAll('[data-meridian-module]')].map((item) => [item.dataset.meridianModule, item.checked])); writePrefs({ ...readPrefs(), modules }); app.updateHomeSummary(); app.saveSoon?.(); }));
     section.querySelectorAll('details.module-group').forEach((group) => group.addEventListener('toggle', () => { const title = group.querySelector('summary')?.textContent || ''; const key = title.startsWith('Unit 1') ? 'unit-1' : title.startsWith('Unit 2') ? 'unit-2' : 'reference'; writePrefs({ ...readPrefs(), groups: { ...readPrefs().groups, [key]: group.open } }); }));
   }
@@ -192,6 +201,13 @@
     window.MeridianApp = app;
     app.updateDocumentTitle = () => { document.title = FOUNDATION.title; };
     app.getEnabledModules = () => { const prefs = readPrefs(); return MODULES.filter((m) => prefs.modules?.[m.key] === true && (QUESTIONS[m.key] || []).length).map((m) => m.key); };
+    // Meridian's Canvas modules are owned by this adapter, not the legacy empty Spanish list in app.js.
+    // Apply shared links here and replace the legacy empty-list share handler with the real module set.
+    const sharedModules = new URLSearchParams(location.search).get('modules');
+    if (sharedModules !== null) {
+      const chosen = new Set(sharedModules.split(',').filter((key) => byKey[key]));
+      writePrefs({ ...readPrefs(), modules: Object.fromEntries(MODULES.map((module) => [module.key, chosen.has(module.key)])) });
+    }
     app.isModulePracticeEnabled = (key) => app.getEnabledModules().includes(key);
     app.getModuleCounts = (key) => { const total = (QUESTIONS[key] || []).length; const hidden = app.state?.hiddenItems || {}; return { total, available: (QUESTIONS[key] || []).filter((item) => !hidden[item.id]).length }; };
     app.generateQuestion = (key) => { const pool = (QUESTIONS[key] || []).filter((item) => !app.state?.hiddenItems?.[item.id]); if (!pool.length) return null; return { ...pool[Math.floor(Math.random() * pool.length)], module: key }; };
