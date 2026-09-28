@@ -200,7 +200,7 @@
     const app = window.SpanishPracticeApp; if (!app) return;
     window.MeridianApp = app;
     app.updateDocumentTitle = () => { document.title = FOUNDATION.title; };
-    app.getEnabledModules = () => { const prefs = readPrefs(); return MODULES.filter((m) => prefs.modules?.[m.key] === true && (QUESTIONS[m.key] || []).length).map((m) => m.key); };
+    app.getEnabledModules = () => { const prefs = readPrefs(); const hidden = app.state?.hiddenItems || {}; return MODULES.filter((m) => prefs.modules?.[m.key] === true && (QUESTIONS[m.key] || []).some((item) => !hidden[item.id])).map((m) => m.key); };
     // Meridian's Canvas modules are owned by this adapter, not the legacy empty Spanish list in app.js.
     // Apply shared links here and replace the legacy empty-list share handler with the real module set.
     const sharedModules = new URLSearchParams(location.search).get('modules');
