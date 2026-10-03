@@ -27,6 +27,20 @@ The Canvas AP Human Geography course was checked on 2026-09-23. Unit 2 included 
 
 ## October 3, 2026 course refresh
 
-The current Canvas Modules and Study Support pages were reviewed read-only. The class sequence now runs through Topic 2.12, and the combined Unit 1/Unit 2 Test is listed for October 7. Meridian links directly to the current Canvas lessons and the teacher slide decks for Topics 2.7, 2.10, 2.11, and 2.12; those decks were opened and reviewed in Google Slides. Their principal topics are population policy effects; push/pull and intervening migration factors; forced and voluntary migration types; and migration's economic, social, demographic, and political effects.
+The current Canvas Modules and Study Support pages were reviewed read-only. The class sequence now runs through Topic 2.12, and the combined Unit 1/Unit 2 Test is listed for October 7. Meridian links directly to the current Canvas lessons and the teacher slide decks for Topics 2.3, 2.7, and 2.10–2.12. The 2.7 deck was reviewed in Google Slides; the other PDFs are retained as teacher source materials linked from the course.
 
-The Unit 1 Quizlet set linked from Study Support was reviewed. Its terminology informs scenario questions in Meridian's cumulative review. The Unit 2 Quizlet page presented a human-verification challenge in the browser, so it was not accessed or copied. Meridian retains its Study Support link for students to use directly.
+Both Anderson Summer Work Quizlet sets linked from Study Support were reviewed and copied into separate typing vocabulary modules. Their original links remain in Meridian for reference.
+
+## October 3, 2026 source additions
+
+The following teacher-provided lecture decks were exported as PDFs from the Google Slides linked in the current Canvas course Modules page. The PDFs are retained here for the Public Library and local module source links; the Google source links remain the editable originals.
+
+| Canvas label | PDF | Google source |
+| --- | --- | --- |
+| 2.3 Lecture Slides (deck title: 2.3 & 2.9 Population Composition) | `2-3-population-pyramids.pdf` | [Slides](https://docs.google.com/presentation/d/1D0fjFxmI95sw928lEEtwwXkBhn-sbyq2VkZ7xfzT0kQ/edit) |
+| 2.7 Lecture Slides | `2-7-population-policies.pdf` | [Slides](https://docs.google.com/presentation/d/12ATsloz5F43-hmDkmZE9qaV9Fh69k_xh49wbHrL85P4/edit) |
+| 2.10 Lecture Slides | `2-10-causes-of-migration.pdf` | [Slides](https://docs.google.com/presentation/d/1ebcAewp1TznvI3Fn589xuNCF2bALuxI1umZ0xVJoV8s/edit) |
+| 2.11 Lecture Slides | `2-11-forced-and-voluntary-migration.pdf` | [Slides](https://docs.google.com/presentation/d/1bzdpX2mlrJ_MOkRz-beS3s-IVEEIUNUgvuM2tuiodDc/edit) |
+| 2.12 Lecture Slides | `2-12-effects-of-migration.pdf` | [Slides](https://docs.google.com/presentation/d/1YoYj2ARiRTeWF2VkZtp7odcP1R0Z0_LUPWbdvGEn_04/edit) |
+
+The source PDFs are teacher-provided. The Library offers these copies alongside their original Google Slides sources.

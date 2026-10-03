@@ -13,10 +13,10 @@ Meridian is the AP Human Geography learning app in the Atlas collection. The cur
 - first-run, settings, hidden-question, and export/import UI plumbing
 - Vercel static/API configuration
 - Canvas AP Human Geography source exports in `assets/canvas-ap-human-geo/`
-- twenty course-aligned practice modules registered by `meridian-adapter.js`, covering Unit 1 Topics 1.1–1.7 and Unit 2 Topics 2.1–2.12, plus FRQ practice and Test 1 review
+- twenty-two course-aligned practice modules registered by `meridian-adapter.js`, covering Unit 1 Topics 1.1–1.7 and Unit 2 Topics 2.1–2.12, plus FRQ practice and Test 1 review
 - direct source links from module settings to available Canvas lessons, teacher slide decks, Quizlet sets, and local source files
 - free/Premium split practice in selected migration topics and a Test 1 review with exactly half of its questions Premium-gated
-- public Library entries for the ten collected PDF review files
+- public Library entries for the seventeen collected PDF resources, including the newly added 2.3, 2.7, and 2.10–2.12 teacher decks
 
 ## Scope boundaries
 
@@ -45,4 +45,7 @@ The intended Vercel project is `meridianhistory.vercel.app`. Deployment and serv
 
 The AP Human Geo Canvas Modules page and Study Support page were reviewed on 2026-10-03. The course was through Unit 2 Topic 2.12; the combined Unit 1/Unit 2 Test was listed for October 7. New coverage fills the earlier 1.6 and 2.3 gaps, adds 2.7–2.12, and places the cumulative review last in the Reference and FRQ group.
 
-Teacher slide decks for 2.7, 2.10, 2.11, and 2.12 were opened read-only and informed the questions. The public Unit 1 Quizlet set was reviewed and its terms (including site/situation, map distortion, diffusion, and GIS/GPS) informed the cumulative practice. Quizlet's Unit 2 set presented a human-verification challenge, so its contents were not inspected or copied; its link remains available from the module source list. Course topic titles, quizzes, and Edpuzzle labels from Canvas inform the remaining source-linked practice.
+Teacher slide decks for 2.7, 2.10, 2.11, and 2.12 were opened read-only and informed the questions. Both Anderson Summer Work Quizlet sets for Units 1 and 2 were reviewed from the open pages and copied into separate typing vocabulary modules. Their source links remain in Meridian. Course topic titles, quizzes, and Edpuzzle labels from Canvas inform the remaining source-linked practice.
+
+
+The Canvas source folder also includes PDF exports for the 2.3 Population Composition/Pyramids, 2.7 Population Policies, 2.10 Causes of Migration, 2.11 Forced and Voluntary Migration, and 2.12 Effects of Migration teacher slide decks. Each appears in the public Library and as a local source link in its related module.
