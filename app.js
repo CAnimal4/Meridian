@@ -6331,9 +6331,26 @@ mean/nice
           correct = !!parsed && q.acceptableTime.has(parsed);
         } else {
           correct = q.acceptable && q.acceptable.has(userNorm);
+          if (!correct && (q.module === 'aphg-summer-unit-1-vocab' || q.module === 'aphg-summer-unit-2-vocab')) {
+            const expected = normalizeLoose(q.expectedDisplay);
+            const maxDistance = expected.length >= 14 ? 2 : expected.length >= 6 ? 1 : 0;
+            if (maxDistance && Math.abs(userNorm.length - expected.length) <= maxDistance) {
+              let previous = Array.from({ length: expected.length + 1 }, (_, i) => i);
+              for (let i = 1; i <= userNorm.length; i++) {
+                const current = [i]; let rowMin = i;
+                for (let j = 1; j <= expected.length; j++) {
+                  current[j] = Math.min(current[j - 1] + 1, previous[j] + 1, previous[j - 1] + (userNorm[i - 1] === expected[j - 1] ? 0 : 1));
+                  rowMin = Math.min(rowMin, current[j]);
+                }
+                previous = current;
+                if (rowMin > maxDistance) break;
+              }
+              correct = previous[expected.length] <= maxDistance;
+            }
+          }
         }
 
-        const validAnswer = correct && q.acceptable && q.acceptable.has(userNorm);
+        const validAnswer = correct && q.acceptable && (q.acceptable.has(userNorm) || q.module === 'aphg-summer-unit-1-vocab' || q.module === 'aphg-summer-unit-2-vocab');
         const targetMissed = validAnswer && q.targetAnswerNorm && userNorm !== q.targetAnswerNorm;
         if (validAnswer) this.recordAnswerVariant(q, user);
 
