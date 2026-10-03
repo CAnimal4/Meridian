@@ -11,8 +11,10 @@ a{color:var(--brand)}
 .feedback-fab{border-color:var(--keyhint-border)}
 .premium-btn:hover,#settingsBtn:hover{background:var(--brand-soft)}
 .premium-btn.unlocked{color:var(--brand-strong)}
+.meridian-source-links{display:flex;flex-wrap:wrap;gap:4px 9px;margin-top:5px;color:#786653;font-size:.72rem;line-height:1.35}.meridian-source-links a{color:#6f5138;text-decoration:underline;text-underline-offset:2px}.meridian-source-links a:hover{color:#3f2d1d}.premium-module-tag{display:inline-flex;align-items:center;gap:4px;margin-left:7px;padding:3px 8px;border:1px solid #dfc6a8;border-radius:999px;background:#f4eadc;color:#654a31;font-size:.68rem;font-weight:800;line-height:1.25;vertical-align:middle}.meridian-unlock-module{white-space:nowrap}
 .admin-export-panel{border-color:var(--keyhint-border);background:var(--brand-soft)}
 .home-mark{object-fit:contain}
 .brand-switcher-button .brand-mark{transform:scale(1.28);transform-origin:center}
 .home-mark{transform:scale(1.18);transform-origin:center}
 .app-switcher-menu a[href*="meridianhistory"] img{transform:scale(1.34);transform-origin:center}
+.toggle.is-premium-locked{opacity:1}

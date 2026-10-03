@@ -24,3 +24,9 @@ The PDF exports are the review copies used for curriculum inspection. The DOCX a
 The source PDFs are teacher-provided materials. Meridian question prompts below are concise practice checks derived from the stated objectives and visible lesson content; they do not replace the source files.
 
 The Canvas AP Human Geography course was checked on 2026-09-23. Unit 2 included 2.5 and 2.6 slides, assignments, and the 2.4–2.6 quiz. The two slide decks above were exported from the exact Google Slides linked from the Canvas lesson pages. Earlier units remain represented by the downloaded source files listed above.
+
+## October 3, 2026 course refresh
+
+The current Canvas Modules and Study Support pages were reviewed read-only. The class sequence now runs through Topic 2.12, and the combined Unit 1/Unit 2 Test is listed for October 7. Meridian links directly to the current Canvas lessons and the teacher slide decks for Topics 2.7, 2.10, 2.11, and 2.12; those decks were opened and reviewed in Google Slides. Their principal topics are population policy effects; push/pull and intervening migration factors; forced and voluntary migration types; and migration's economic, social, demographic, and political effects.
+
+The Unit 1 Quizlet set linked from Study Support was reviewed. Its terminology informs scenario questions in Meridian's cumulative review. The Unit 2 Quizlet page presented a human-verification challenge in the browser, so it was not accessed or copied. Meridian retains its Study Support link for students to use directly.
